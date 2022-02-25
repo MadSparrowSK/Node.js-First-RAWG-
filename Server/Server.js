@@ -4,6 +4,8 @@ const EventEmitter = require('events');
 const errors = require('./src/errors')
 const request = require('./src/axios.request.js')
 
+const {Game} = require('./src/gamesList')
+
 module.exports = class Server {
     constructor() {
         this.server = this._createServer();
@@ -35,7 +37,6 @@ module.exports = class Server {
         const id = url.substring(url.lastIndexOf('/') + 1);
         return id;
     }
-
     addDynamicRoute(method,path) {
         this.emitter.on(this._getRouteMask(path, method), async (req, res) => {
             const id = this.getIdFromURL(req.url)
@@ -44,7 +45,8 @@ module.exports = class Server {
                 res.send(errors['404'])
             } else {
                 const data =  await respond.data;
-                res.send(data)
+                const game = Game(data);
+                res.send(game)
             }
 
         })

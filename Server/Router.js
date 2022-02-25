@@ -14,7 +14,6 @@ module.exports = class Router {
         }
         endpoint[method] = handler;
     }
-
     get(path, handler) {
         this.request('GET', path, handler)
     }

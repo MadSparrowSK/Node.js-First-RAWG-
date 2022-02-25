@@ -1,7 +1,7 @@
 const Router = require('../Router')
 
 const request = require('./axios.request')
-const makeGameList = require('./gamesList')
+const {makeGameList} = require('./gamesList')
 
 const errors = require('./errors')
 const {regexpToText} = require("nodemon/lib/utils");
@@ -41,5 +41,6 @@ router.get('/games', async (req,res) => {
 router.get('/test', (req,res) => {
     res.send(test)
 })
+
 
 module.exports = router;
